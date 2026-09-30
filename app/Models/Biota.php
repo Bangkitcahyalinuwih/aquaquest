@@ -12,6 +12,7 @@ class Biota extends Model
 
     // Kolom yang boleh diisi lewat Biota::create([...]). Ini pengaman: kolom di luar
     // daftar ini akan DITOLAK walau ada di request, mencegah orang iseng mengisi kolom lain.
+    protected $table = 'biota';
     protected $fillable = [
         'nama', 'nama_latin', 'slug', 'kategori', 'deskripsi',
         'habitat', 'status_konservasi', 'gambar', 'latitude', 'longitude',
