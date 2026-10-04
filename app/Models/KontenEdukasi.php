@@ -14,6 +14,11 @@ class KontenEdukasi extends Model
 
     protected $fillable = ['biota_id', 'judul', 'slug', 'isi', 'gambar'];
 
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
     // Kebalikan dari relasi di atas: satu konten edukasi MILIK satu biota (atau tidak sama sekali).
     public function biota(): BelongsTo
     {

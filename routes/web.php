@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BiotaController;
+use App\Http\Controllers\KontenEdukasiController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,4 +24,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/biota', [BiotaController::class, 'index'])->name('biota.index');
 Route::get('/biota/{biota:slug}', [BiotaController::class, 'show'])->name('biota.show');
 
-require __DIR__.'/auth.php';
+Route::get('/edukasi', [KontenEdukasiController::class, 'index'])->name('edukasi.index');
+Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->name('edukasi.show');
+
+require __DIR__ . '/auth.php';
