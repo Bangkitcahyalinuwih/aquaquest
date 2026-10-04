@@ -65,7 +65,7 @@
             <p class="leading-relaxed text-gray-700">{{ $biota->deskripsi }}</p>
         </div>
 
-        {{-- location --}}
+        {{-- Location --}}
         @if ($biota->latitude && $biota->longitude)
             <div class="bg-white rounded-2xl shadow-sm p-6 border-2 border-dashed border-accent">
                 <div class="flex items-center gap-2 text-primary font-semibold">

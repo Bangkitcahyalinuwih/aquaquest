@@ -4,7 +4,6 @@
 
 <div class="relative left-1/2 -translate-x-1/2 w-screen -mt-8 -mb-4">
 
-    {{-- Hero --}}
     <div class="bg-gradient-to-r from-primary to-secondary">
         <div class="px-6 py-10">
             <h1 class="text-2xl md:text-3xl font-bold text-white">Ensiklopedia Biota</h1>
@@ -12,21 +11,20 @@
         </div>
     </div>
 
-    {{-- Daftar kartu --}}
+{{-- Daftar Kartu --}}
     <div class="px-6 py-8">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-            @foreach ($biota as $item)
-                <a href="{{ route('biota.show', $item) }}" class="group block w-full max-w-[280px]">
-
+       <div class="px-6 py-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 justify-items-center">
+                @foreach ($biota as $item)
+                    <a href="{{ route('biota.show', $item) }}" class="group block w-full max-w-[280px]">
                     {{-- Bingkai luar kartu --}}
                     <div class="rounded-2xl p-1.5 bg-gradient-to-br from-primary via-secondary to-accent
                                 shadow-md group-hover:shadow-2xl group-hover:-translate-y-2 group-hover:rotate-1
                                 transition duration-300">
 
-                        {{-- Isi kartu (rasio potret) --}}
+                        {{-- Isi kartu --}}
                         <div class="bg-surface rounded-xl p-3 aspect-[5/7] flex flex-col overflow-hidden">
 
-                            {{-- Nama + lencana status --}}
                             <div class="flex items-center justify-between gap-2">
                                 <h2 class="font-bold text-primary leading-tight line-clamp-1">{{ $item->nama }}</h2>
                                 @if ($item->status_konservasi)
@@ -52,7 +50,7 @@
                                 @endif
                             </div>
 
-                            {{-- Pita kategori + nama latin --}}
+                            {{-- kategori --}}
                             <div class="mt-2 flex items-center justify-between gap-2 px-2 py-1 rounded-md bg-primary text-white text-[11px]">
                                 <span class="inline-flex items-center gap-1 font-medium">
                                     <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -63,7 +61,7 @@
                                 <span class="italic text-white/80 truncate">{{ $item->nama_latin }}</span>
                             </div>
 
-                            {{-- Kotak deskripsi --}}
+                            {{-- deskripsi --}}
                             <div class="mt-2 flex-1 rounded-lg bg-white/80 border border-primary/10 p-2">
                                 <p class="text-xs text-gray-600 line-clamp-4">{{ $item->deskripsi }}</p>
                             </div>

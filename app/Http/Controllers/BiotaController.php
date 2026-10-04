@@ -9,9 +9,9 @@ class BiotaController extends Controller
     // Dipanggil saat orang buka GET /biota
     public function index()
     {
-        $biota = Biota::latest()->paginate(9);
+        $biota = Biota::latest()->paginate(10);
         // latest()  -> urutkan dari yang terbaru dibuat
-        // paginate(9) -> ambil 9 per halaman, otomatis sediakan link "halaman 2, 3, dst."
+        // paginate(10) -> ambil 10 per halaman, otomatis sediakan link "halaman 2, 3, dst."
 
         return view('biota.index', compact('biota'));
         // artinya: tampilkan file resources/views/biota/index.blade.php,

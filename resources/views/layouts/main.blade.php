@@ -23,11 +23,24 @@
             </button>
 
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+                @php
+                    $aktif   = 'block py-2 px-3 text-white bg-cyan-600 rounded md:bg-transparent md:text-cyan-600 md:p-0';
+                    $biasa   = 'block py-2 px-3 text-slate-600 rounded hover:bg-cyan-100 md:hover:bg-transparent md:hover:text-cyan-500 md:p-0';
+                @endphp
+
                 <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-cyan-100 rounded-lg bg-cyan-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
-                    <li><a href="#" class="block py-2 px-3 text-white bg-cyan-600 rounded md:bg-transparent md:text-cyan-600 md:p-0">Beranda</a></li>
-                    <li><a href="#" class="block py-2 px-3 text-slate-600 rounded hover:bg-cyan-100 md:hover:bg-transparent md:hover:text-cyan-500 md:p-0">Ensiklopedia</a></li>
-                    <li><a href="#" class="block py-2 px-3 text-slate-600 rounded hover:bg-cyan-100 md:hover:bg-transparent md:hover:text-cyan-500 md:p-0">Materi Edukasi</a></li>
-                    <li><a href="#" class="block py-2 px-3 text-slate-600 rounded hover:bg-cyan-100 md:hover:bg-transparent md:hover:text-cyan-500 md:p-0">Game & Kuis</a></li>
+                    <li>
+                        <a href="{{ url('/') }}" class="{{ request()->is('/') ? $aktif : $biasa }}">Beranda</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('biota.index') }}" class="{{ request()->routeIs('biota.*') ? $aktif : $biasa }}">Ensiklopedia</a>
+                    </li>
+                    <li>
+                        <a href="#" class="{{ $biasa }}">Materi Edukasi</a>
+                    </li>
+                    <li>
+                        <a href="#" class="{{ $biasa }}">Game & Kuis</a>
+                    </li>
                 </ul>
             </div>
         </div>
