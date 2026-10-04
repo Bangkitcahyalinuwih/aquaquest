@@ -11,6 +11,7 @@ class Kartu extends Model
 {
     use HasFactory;
 
+    protected $table = 'kartu';
     protected $fillable = ['biota_id', 'nama', 'gambar', 'xp_syarat'];
 
     public function biota(): BelongsTo
