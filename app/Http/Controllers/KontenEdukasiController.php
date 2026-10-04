@@ -8,7 +8,7 @@ class KontenEdukasiController extends Controller
 {
     public function index()
     {
-        $konten = KontenEdukasi::latest()->paginate(9);
+        $konten = KontenEdukasi::latest()->paginate(10);
 
         return view('edukasi.index', compact('konten'));
     }
