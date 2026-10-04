@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
             ]);
         });
 
+        \App\Models\KontenEdukasi::factory()->count(6)->create();
+
         // \App\Models\Biota::factory()->count(10)->create();
     }
 }
