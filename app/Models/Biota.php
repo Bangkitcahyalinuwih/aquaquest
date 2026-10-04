@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Biota extends Model
 {
@@ -14,8 +15,16 @@ class Biota extends Model
     // daftar ini akan DITOLAK walau ada di request, mencegah orang iseng mengisi kolom lain.
     protected $table = 'biota';
     protected $fillable = [
-        'nama', 'nama_latin', 'slug', 'kategori', 'deskripsi',
-        'habitat', 'status_konservasi', 'gambar', 'latitude', 'longitude',
+        'nama',
+        'nama_latin',
+        'slug',
+        'kategori',
+        'deskripsi',
+        'habitat',
+        'status_konservasi',
+        'gambar',
+        'latitude',
+        'longitude',
     ];
 
     // Laravel biasanya cari data lewat kolom "id" di URL (/biota/5). Baris ini mengubahnya
@@ -30,5 +39,14 @@ class Biota extends Model
     public function kontenEdukasi(): HasMany
     {
         return $this->hasMany(KontenEdukasi::class, 'biota_id');  // foreign key di tabel konten_edukasi    
+    }
+    public function soalKuis(): HasMany
+    {
+        return $this->hasMany(SoalKuis::class);
+    }
+
+    public function kartu(): HasOne
+    {
+        return $this->hasOne(Kartu::class);
     }
 }
