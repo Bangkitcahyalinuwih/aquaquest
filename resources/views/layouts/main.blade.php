@@ -36,7 +36,7 @@
                         <a href="{{ route('biota.index') }}" class="{{ request()->routeIs('biota.*') ? $aktif : $biasa }}">Ensiklopedia</a>
                     </li>
                     <li>
-                        <a href="#" class="{{ $biasa }}">Materi Edukasi</a>
+                        <a href="{{ route('edukasi.index') }}" class="{{ request()->routeIs('edukasi.*') ? $aktif : $biasa }}">Materi Edukasi</a>
                     </li>
                     <li>
                         <a href="#" class="{{ $biasa }}">Game & Kuis</a>
