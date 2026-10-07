@@ -65,17 +65,36 @@
             <p class="leading-relaxed text-gray-700">{{ $biota->deskripsi }}</p>
         </div>
 
-        {{-- Location --}}
+        {{-- Location (Peta Leaflet Terpasang) --}}
         @if ($biota->latitude && $biota->longitude)
             <div class="bg-white rounded-2xl shadow-sm p-6 border-2 border-dashed border-accent">
-                <div class="flex items-center gap-2 text-primary font-semibold">
+                <div class="flex items-center gap-2 text-primary font-semibold mb-4">
                     <svg class="w-5 h-5 text-secondary" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>
-                    Lokasi: {{ $biota->latitude }}, {{ $biota->longitude }}
+                    Peta Persebaran Lokasi
                 </div>
-                <p class="text-xs text-gray-500 mt-1">(peta Leaflet akan dipasang Aziz di giliran berikutnya)</p>
+                
+                <!-- Ruang untuk Peta Leaflet -->
+                <div id="peta-biota" class="w-full rounded-xl shadow-sm border border-gray-200" style="height: 350px; z-index: 10;"></div>
+                
+                <p class="text-xs text-gray-500 mt-3 text-center">Koordinat: {{ $biota->latitude }}, {{ $biota->longitude }}</p>
+
+                <!-- Script Leaflet -->
+                @push('scripts')
+                    <script>
+                        const peta = L.map('peta-biota').setView([{{ $biota->latitude }}, {{ $biota->longitude }}], 8);
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; OpenStreetMap contributors',
+                        }).addTo(peta);
+
+                        L.marker([{{ $biota->latitude }}, {{ $biota->longitude }}])
+                            .addTo(peta)
+                            .bindPopup('<b>{{ $biota->nama }}</b><br>{{ $biota->habitat }}');
+                    </script>
+                @endpush
             </div>
         @endif
     </div>

@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'AquaQuest')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- CSS & JS LEAFLET -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body class="bg-sky-50 font-sans antialiased text-slate-800 flex flex-col min-h-screen">
 
@@ -57,6 +61,9 @@
             © 2026 <span class="text-cyan-600 font-semibold">AquaQuest</span>. Sistem Edukasi Biota Air (Dinas Perikanan).
         </div>
     </footer>
+
+    <!-- STACK SCRIPTS UNTUK MEMUAT PETA LEAFLET -->
+    @stack('scripts')
 
 </body>
 </html>
