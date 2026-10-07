@@ -75,23 +75,7 @@
                     </svg>
                     Lokasi: {{ $biota->latitude }}, {{ $biota->longitude }}
                 </div>
-                @if ($biota->latitude && $biota->longitude)
-    <div id="peta-biota" class="mt-4 rounded" style="height: 300px; z-index: 10;"></div>
-
-    @push('scripts')
-        <script>
-            const peta = L.map('peta-biota').setView([{{ $biota->latitude }}, {{ $biota->longitude }}], 8);
-
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; OpenStreetMap contributors',
-            }).addTo(peta);
-
-            L.marker([{{ $biota->latitude }}, {{ $biota->longitude }}])
-                .addTo(peta)
-                .bindPopup('{{ $biota->nama }}');
-        </script>
-    @endpush
-@endif
+                <p class="text-xs text-gray-500 mt-1">(peta Leaflet akan dipasang Aziz di giliran berikutnya)</p>
             </div>
         @endif
     </div>
