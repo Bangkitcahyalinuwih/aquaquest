@@ -32,6 +32,5 @@ Route::get('/biota/{biota:slug}', [BiotaController::class, 'show'])->name('biota
 Route::get('/edukasi', [KontenEdukasiController::class, 'index'])->name('edukasi.index');
 Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->name('edukasi.show');
 
-
-Route::middleware('auth')->group(function () {});
+Route::get('/koleksi', [KartuController::class, 'index'])->name('kartu.index')->middleware('auth');
 require __DIR__ . '/auth.php';
