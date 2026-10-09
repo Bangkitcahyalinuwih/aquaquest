@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <body class="bg-sky-50 font-sans antialiased text-slate-800 flex flex-col min-h-screen">
 
     <!-- NAVBAR UTAMA -->
