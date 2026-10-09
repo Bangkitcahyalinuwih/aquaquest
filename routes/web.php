@@ -6,14 +6,16 @@ use App\Http\Controllers\BiotaController;
 use App\Http\Controllers\KontenEdukasiController;
 use App\Http\Controllers\KartuController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -33,4 +35,5 @@ Route::get('/edukasi', [KontenEdukasiController::class, 'index'])->name('edukasi
 Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->name('edukasi.show');
 
 Route::get('/koleksi', [KartuController::class, 'index'])->name('kartu.index')->middleware('auth');
+Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 require __DIR__ . '/auth.php';

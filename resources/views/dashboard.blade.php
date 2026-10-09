@@ -1,17 +1,16 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+    <div class="max-w-3xl mx-auto py-8 px-4">
+        <h1 class="text-2xl font-bold">Halo, {{ $user->name }}</h1>
+        <p>Level {{ $user->level }} — {{ $user->total_xp }} XP</p>
+        <p>Kartu yang kamu miliki: {{ $jumlahKartuDimiliki }}</p>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
-        </div>
+        @if ($kartuBerikutnya)
+            <p>
+                Kartu berikutnya "{{ $kartuBerikutnya->nama }}" terbuka di {{ $kartuBerikutnya->xp_syarat }} XP
+                (kurang {{ $kartuBerikutnya->xp_syarat - $user->total_xp }} XP lagi).
+            </p>
+        @else
+            <p>Kamu sudah membuka semua kartu yang tersedia!</p>
+        @endif
     </div>
 </x-app-layout>
