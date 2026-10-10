@@ -88,7 +88,6 @@ class KuisService
             }
         }
 
-        // Aturan anti-farming: cuma sesi PERTAMA yang selesai hari ini yang XP-nya dikreditkan.
         $sudahMainHariIni = GameHistory::where('user_id', $game->user_id)
             ->where('status', 'selesai')
             ->whereDate('selesai_at', today())
