@@ -1,6 +1,4 @@
-@extends('layouts.main')
-@section('title', 'Koleksi Kartu - AquaQuest')
-@section('content')
+<x-app-layout>
 
 <div class="relative left-1/2 -translate-x-1/2 w-screen -mt-8 -mb-4">
 
@@ -33,4 +31,4 @@
     </div>
 </div>
 
-@endsection
+</x-app-layout>
