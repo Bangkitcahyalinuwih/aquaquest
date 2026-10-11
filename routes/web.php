@@ -22,9 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/kuis', [QuizController::class, 'index'])->name('kuis.index');
-    Route::post('/kuis/mulai', [QuizController::class, 'mulai'])->name('kuis.mulai');
-    Route::post('/kuis/{game}/jawab', [QuizController::class, 'jawab'])->name('kuis.jawab');
-    Route::post('/kuis/{game}/selesai', [QuizController::class, 'selesai'])->name('kuis.selesai');
+    Route::middleware('throttle:kuis')->group(function () {
+        Route::post('/kuis/mulai', [QuizController::class, 'mulai'])->name('kuis.mulai');
+        Route::post('/kuis/{game}/jawab', [QuizController::class, 'jawab'])->name('kuis.jawab');
+        Route::post('/kuis/{game}/selesai', [QuizController::class, 'selesai'])->name('kuis.selesai');
+    });
 });
 
 Route::get('/biota', [BiotaController::class, 'index'])->name('biota.index');

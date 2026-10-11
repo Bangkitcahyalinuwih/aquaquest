@@ -21,6 +21,10 @@ class KuisService
     {
         $soalIds = SoalKuis::inRandomOrder()->limit(self::JUMLAH_SOAL)->pluck('id')->toArray();
 
+        if (empty($soalIds)) {
+            abort(422, 'Belum ada soal kuis yang tersedia.');
+        }
+
         return GameHistory::create([
             'user_id' => $user->id,
             'mulai_at' => now(),
