@@ -11,12 +11,26 @@ class DashboardController extends Controller
     {
         $user = $request->user();
 
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        }
+
         $kartuBerikutnya = Kartu::where('xp_syarat', '>', $user->total_xp)
             ->orderBy('xp_syarat')
             ->first();
 
         $jumlahKartuDimiliki = $user->koleksiKartu()->count();
 
-        return view('dashboard', compact('user', 'kartuBerikutnya', 'jumlahKartuDimiliki'));
+        $sesiSelesai = $user->gameHistory()->where('status', 'selesai');
+        $pernahMain = (clone $sesiSelesai)->exists();
+        $sudahMainHariIni = (clone $sesiSelesai)->whereDate('selesai_at', today())->exists();
+
+        return view('dashboard', compact(
+            'user',
+            'kartuBerikutnya',
+            'jumlahKartuDimiliki',
+            'pernahMain',
+            'sudahMainHariIni'
+        ));
     }
 }
