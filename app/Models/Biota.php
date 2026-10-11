@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Concerns\HasGambarUrl;
 
 class Biota extends Model
 {
-    use HasFactory;   // supaya bisa pakai Biota::factory() untuk data contoh
+    use HasFactory, HasGambarUrl;   // supaya bisa pakai Biota::factory() untuk data contoh
 
     // Kolom yang boleh diisi lewat Biota::create([...]). Ini pengaman: kolom di luar
     // daftar ini akan DITOLAK walau ada di request, mencegah orang iseng mengisi kolom lain.

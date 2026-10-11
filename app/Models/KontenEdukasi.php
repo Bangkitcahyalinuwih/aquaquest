@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+use App\Models\Concerns\HasGambarUrl;
+
 class KontenEdukasi extends Model
 {
-    use HasFactory;
+    use HasFactory, HasGambarUrl;
 
     protected $table = 'konten_edukasi';   // nama tabelnya jamak tidak standar, jadi ditulis manual
 
