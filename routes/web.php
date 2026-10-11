@@ -8,10 +8,9 @@ use App\Http\Controllers\KartuController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth'])
