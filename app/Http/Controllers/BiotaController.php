@@ -2,20 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Biota;
 
 class BiotaController extends Controller
 {
-    // Dipanggil saat orang buka GET /biota
-    public function index()
+    public function index(Request $request)
     {
-        $biota = Biota::latest()->paginate(10);
-        // latest()  -> urutkan dari yang terbaru dibuat
-        // paginate(10) -> ambil 10 per halaman, otomatis sediakan link "halaman 2, 3, dst."
+        $request->validate([
+            'q' => 'nullable|string|max:100',
+            'kategori' => 'nullable|string|max:100',
+        ]);
 
-        return view('biota.index', compact('biota'));
-        // artinya: tampilkan file resources/views/biota/index.blade.php,
-        // kirim variabel $biota ke file itu
+        $biota = Biota::query()
+            ->when($request->filled('q'), function ($query) use ($request) {
+                $kata = '%' . $request->q . '%';
+                $query->where(fn($w) => $w->where('nama', 'like', $kata)->orWhere('nama_latin', 'like', $kata));
+            })
+            ->when($request->filled('kategori'), fn($query) => $query->where('kategori', $request->kategori))
+            ->orderBy('nama')
+            ->paginate(9)
+            ->withQueryString();
+
+        $daftarKategori = Biota::query()->distinct()->orderBy('kategori')->pluck('kategori');
+
+        return view('biota.index', compact('biota', 'daftarKategori'));
     }
 
     // Dipanggil saat orang buka GET /biota/{slug}, misal /biota/penyu-hijau
