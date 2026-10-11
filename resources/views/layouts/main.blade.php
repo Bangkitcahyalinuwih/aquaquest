@@ -44,7 +44,7 @@
                         <a href="{{ route('edukasi.index') }}" class="{{ request()->routeIs('edukasi.*') ? $aktif : $biasa }}">Materi Edukasi</a>
                     </li>
                     <li>
-                        <a href="#" class="{{ $biasa }}">Game & Kuis</a>
+                        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? $aktif : $biasa }}">Game & Kuis</a>
                     </li>
                 </ul>
             </div>
