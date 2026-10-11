@@ -5,11 +5,12 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__.'/../routes/web.php',
-        commands: __DIR__.'/../routes/console.php',
+        web: __DIR__ . '/../routes/web.php',
+        commands: __DIR__ . '/../routes/console.php',
         health: '/up',
         then: function () {
             Route::middleware(['web', 'auth', 'role:admin'])
@@ -23,6 +24,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => EnsureUserHasRole::class,
         ]);
+
+        $middleware->redirectUsersTo(
+            fn(Request $request) => $request->user()?->role === 'admin'
+                ? route('admin.dashboard')
+                : route('dashboard')
+        );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
