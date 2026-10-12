@@ -84,7 +84,7 @@
                                         'terumbu karang', 'koral' => 'bg-rose-50 text-rose-700 border-rose-200',
                                         'moluska' => 'bg-orange-50 text-orange-700 border-orange-200',
                                         'krustasea', 'crustacea' => 'bg-amber-50 text-amber-700 border-amber-200',
-                                        'ubur-ubur' => 'bg-indigo-50 text-indigo-700 border-indigo-200',
+                                        'ubur-ubur' => 'bg-cyan-50 text-cyan-700 border-cyan-200',
                                         default
                                             => 'bg-slate-100 text-slate-700 border-slate-200', // Warna bawaan jika tidak masuk kategori atas
                                     };

@@ -71,7 +71,7 @@
                     </template>
 
                     <p class="text-slate-600 pt-2 border-t border-slate-200 mt-2">Level kamu sekarang: <strong
-                            class="text-indigo-600">Level <span x-text="hasilAkhir.level"></span></strong></p>
+                            class="text-cyan-600">Level <span x-text="hasilAkhir.level"></span></strong></p>
                 </div>
 
                 <template x-if="hasilAkhir.kartu_baru && hasilAkhir.kartu_baru.length > 0">
