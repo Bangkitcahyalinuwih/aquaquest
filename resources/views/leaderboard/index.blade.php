@@ -65,7 +65,7 @@
                 {{-- Posisi 4 dst: batang XP relatif --}}
                 @if ($lainnya->isNotEmpty())
                     <ul class="mt-8 space-y-3">
-                        @foreach ($lainnya as $i => $item)
+                        @foreach ($lainnya as $item)
                             @php
                                 $saya = auth()->id() === ($item->id ?? null);
                                 $lebar = (int) round(($item->total_xp / $maks) * 100);
@@ -75,8 +75,10 @@
                                 <div class="absolute inset-y-0 left-0 {{ $saya ? 'bg-secondary/25' : 'bg-accent/20' }} transition-all duration-1000 ease-out"
                                     style="width: {{ $lebar }}%"></div>
                                 <div class="relative flex items-center gap-4 px-4 py-3">
+
                                     <span
-                                        class="w-8 text-lg font-extrabold text-primary/40 tabular-nums">{{ $i + 4 }}</span>
+                                        class="w-8 text-lg font-extrabold text-primary/40 tabular-nums">{{ $loop->iteration + 3 }}</span>
+
                                     <span
                                         class="flex-1 truncate {{ $saya ? 'font-bold text-primary' : 'text-slate-700' }}">
                                         {{ $item->name }}
