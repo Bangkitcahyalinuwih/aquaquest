@@ -5,35 +5,37 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ isset($title) ? $title . ' - ' : '' }}{{ config('app.name', 'AquaQuest') }}</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+<body class="font-sans antialiased bg-teal-50 text-slate-900 min-h-screen flex flex-col">
+    @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        @isset($header)
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endisset
+    @isset($header)
+        <header class="bg-white border-b">
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6">{{ $header }}</div>
+        </header>
+    @endisset
 
-        <!-- Page Content -->
-        <main>
-            {{ $slot }}
-        </main>
-    </div>
+    @if (session('status'))
+        <div class="max-w-7xl w-full mx-auto px-4 sm:px-6 mt-4">
+            <div class="rounded-md border border-green-300 bg-green-50 text-green-800 px-4 py-3 text-sm">
+                {{ session('status') }}
+            </div>
+        </div>
+    @endif
+
+    <main class="flex-1">
+        {{ $slot }}
+    </main>
+
+    @include('layouts.footer')
+
     @stack('scripts')
 </body>
 
