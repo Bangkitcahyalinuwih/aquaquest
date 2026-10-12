@@ -1,24 +1,20 @@
-@extends('layouts.main')
-@section('title', $konten->judul . ' - AquaQuest')
-@section('content')
+<x-app-layout>
+    <div class="max-w-3xl mx-auto py-8 px-4">
+        <a href="{{ route('edukasi.index') }}" class="text-sm text-secondary">&larr; Kembali ke daftar</a>
 
-<div class="max-w-3xl mx-auto">
+        <h1 class="mt-2 text-3xl font-bold text-primary">{{ $konten->judul }}</h1>
 
-    <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl overflow-hidden">
-        <div class="px-6 py-8">
-            <a href="{{ route('edukasi.index') }}" class="inline-flex items-center gap-1 text-sm text-white/80 hover:text-white">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-                </svg>
-                Kembali ke daftar
+        @if ($konten->gambar_url)
+            <img src="{{ $konten->gambar_url }}" alt="{{ $konten->judul }}"
+                class="mt-4 w-full max-h-80 object-cover rounded-lg shadow">
+        @endif
+
+        <article class="mt-6 leading-relaxed text-slate-700 whitespace-pre-line">{{ $konten->isi }}</article>
+
+        @if ($konten->biota)
+            <a href="{{ route('biota.show', $konten->biota) }}" class="inline-block mt-6 text-primary hover:underline">
+                Lihat biota terkait: {{ $konten->biota->nama }}
             </a>
-            <h1 class="text-3xl font-bold text-white mt-3">{{ $konten->judul }}</h1>
-        </div>
+        @endif
     </div>
-
-    <div class="bg-white rounded-2xl shadow-sm p-6 mt-6">
-        <div class="leading-relaxed text-gray-700 whitespace-pre-line">{{ $konten->isi }}</div>
-    </div>
-</div>
-
-@endsection
+</x-app-layout>
