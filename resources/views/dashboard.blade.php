@@ -1,100 +1,73 @@
 <x-app-layout>
+    <x-slot name="header">
+        <h1 class="text-xl font-semibold text-primary">Dashboard</h1>
+    </x-slot>
 
-    @php
-        $adaKartu = (bool) $kartuBerikutnya;
-        if ($adaKartu) {
-            $kebutuhan = $kartuBerikutnya->xp_syarat;
-            $persen = $kebutuhan > 0 ? min(100, (int) floor(($user->total_xp / $kebutuhan) * 100)) : 100;
-            $sisa = max(0, $kebutuhan - $user->total_xp);
-        } else {
-            $persen = 100;
-        }
-    @endphp
+    <div class="max-w-4xl mx-auto py-6 px-4 sm:px-6 space-y-6">
 
-    <div class="relative left-1/2 -translate-x-1/2 w-screen pb-8 overflow-x-hidden">
+        <h2 class="text-2xl font-bold text-primary">Halo, {{ $user->name }}</h2>
 
-        {{-- Hero: level sebagai tipografi besar --}}
-        <div class="relative overflow-hidden rounded-b-[3rem] bg-gradient-to-br from-primary via-primary to-secondary">
-            <div class="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-white/10"></div>
-            <div class="absolute right-24 bottom-6 h-20 w-20 rounded-full bg-accent/20"></div>
+        {{-- Pengguna baru --}}
+        @unless ($pernahMain)
+            <div class="rounded-lg p-6 text-white" style="background:#0E7490">
+                <h3 class="text-lg font-semibold">Selamat datang di AquaQuest!</h3>
+                <p class="mt-1 text-cyan-50">Mainkan kuis pertamamu untuk mendapat XP dan membuka kartu koleksi pertama.</p>
+                <a href="{{ route('kuis.index') }}"
+                    class="inline-block mt-4 px-5 py-2 bg-white text-primary font-semibold rounded-md">Mulai Kuis</a>
+            </div>
+        @endunless
 
-            <div class="relative max-w-4xl mx-auto px-6 pt-12 pb-16">
-                <p class="text-white/80">Halo, {{ $user->name }} 👋</p>
-                <h1 class="mt-1 text-7xl md:text-8xl font-extrabold leading-none text-white">
-                    Level <span class="text-accent">{{ $user->level }}</span>
-                </h1>
-
-                <div class="mt-8 flex items-center gap-6 text-white">
-                    <div>
-                        <p class="text-3xl font-bold tabular-nums">{{ number_format($user->total_xp) }}</p>
-                        <p class="text-sm text-white/70">Total XP</p>
-                    </div>
-                    <div class="h-10 w-px bg-white/30"></div>
-                    <div>
-                        <p class="text-3xl font-bold">{{ $jumlahKartuDimiliki }}</p>
-                        <p class="text-sm text-white/70">Kartu dimiliki</p>
-                    </div>
-                </div>
+        {{-- Ringkasan --}}
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <p class="text-3xl font-bold text-primary">{{ $user->level }}</p>
+                <p class="text-xs text-slate-500">Level</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <p class="text-3xl font-bold text-primary">{{ $user->total_xp }}</p>
+                <p class="text-xs text-slate-500">Total XP</p>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 text-center">
+                <p class="text-3xl font-bold text-primary">{{ $jumlahKartuDimiliki }}</p>
+                <p class="text-xs text-slate-500">Kartu Dimiliki</p>
             </div>
         </div>
 
-        <div class="max-w-4xl mx-auto px-6 py-10">
-
-            {{-- Perjalanan menuju kartu berikutnya --}}
-            @if ($adaKartu)
-                <h2 class="text-xl font-bold text-primary">Menuju kartu {{ $kartuBerikutnya->nama }}</h2>
-                <p class="text-sm text-gray-500 mt-1">
-                    {{ number_format($user->total_xp) }} dari {{ number_format($kebutuhan) }} XP, kurang
-                    {{ number_format($sisa) }} XP lagi.
+        {{-- Progres kartu berikutnya --}}
+        @if ($kartuBerikutnya)
+            @php $persen = min(100, (int) floor($user->total_xp / max(1, $kartuBerikutnya->xp_syarat) * 100)); @endphp
+            <div class="bg-white rounded-lg shadow p-5">
+                <p class="text-sm">
+                    Kartu berikutnya: <strong>{{ $kartuBerikutnya->nama }}</strong>
+                    ({{ $user->total_xp }} / {{ $kartuBerikutnya->xp_syarat }} XP)
                 </p>
-
-                <div class="mt-10 px-4">
-                    <div class="relative">
-                        <div class="h-3 w-full rounded-full bg-primary/10" role="progressbar"
-                            aria-valuenow="{{ $persen }}" aria-valuemin="0" aria-valuemax="100">
-                            <div class="h-3 rounded-full bg-gradient-to-r from-accent to-secondary"
-                                style="width: {{ $persen }}%"></div>
-                        </div>
-                        <span class="absolute -top-8 -translate-x-1/2 text-3xl"
-                            style="left: {{ $persen }}%">🐢</span>
-                        <span
-                            class="absolute -top-8 right-0 translate-x-1/2 text-3xl {{ $persen >= 100 ? '' : 'grayscale opacity-50' }}">🔒</span>
-                    </div>
+                <div class="mt-2 w-full bg-slate-200 rounded-full h-3">
+                    <div class="bg-accent h-3 rounded-full" style="width: {{ $persen }}%"></div>
                 </div>
-            @else
-                <h2 class="text-xl font-bold text-primary">🎉 Semua kartu sudah terbuka</h2>
-                <p class="text-sm text-gray-500 mt-1">Terus main kuis untuk naik peringkat.</p>
-            @endif
-
-            <a href="{{ route('kuis.index') }}"
-                class="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-lg font-bold text-white hover:bg-secondary transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary focus-visible:ring-offset-2">
-                🎯 Main kuis sekarang
-            </a>
-
-            {{-- Menu lain --}}
-            <div class="mt-12 divide-y divide-primary/10 border-y border-primary/10">
-                <a href="{{ route('kartu.index') }}" class="group flex items-center justify-between py-5">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">🃏</span>
-                        <div>
-                            <p class="font-bold text-primary">Koleksi kartu</p>
-                            <p class="text-sm text-gray-500">{{ $jumlahKartuDimiliki }} kartu terbuka</p>
-                        </div>
-                    </div>
-                    <span class="text-secondary text-xl transition group-hover:translate-x-1">→</span>
-                </a>
-                <a href="{{ route('leaderboard.index') }}" class="group flex items-center justify-between py-5">
-                    <div class="flex items-center gap-4">
-                        <span class="text-3xl">🏆</span>
-                        <div>
-                            <p class="font-bold text-primary">Peringkat</p>
-                            <p class="text-sm text-gray-500">Lihat posisimu di antara pemain lain</p>
-                        </div>
-                    </div>
-                    <span class="text-secondary text-xl transition group-hover:translate-x-1">→</span>
-                </a>
             </div>
+        @else
+            <div class="bg-white rounded-lg shadow p-5 text-accent font-semibold">
+                Kamu sudah membuka semua kartu yang tersedia!
+            </div>
+        @endif
+
+        {{-- Status XP harian --}}
+        <div
+            class="rounded-lg border p-4 text-sm {{ $sudahMainHariIni ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-green-50 border-green-200 text-green-800' }}">
+            @if ($sudahMainHariIni)
+                Kamu sudah mendapat jatah XP hari ini. Sesi tambahan tetap bisa dimainkan sebagai latihan, dan XP bisa
+                didapat lagi besok.
+            @else
+                Jatah XP hari ini belum dipakai. Selesaikan satu kuis untuk mendapat XP.
+            @endif
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+            <a href="{{ route('kuis.index') }}" class="px-4 py-2 bg-primary text-white rounded-md text-sm">Main Kuis</a>
+            <a href="{{ route('kartu.index') }}"
+                class="px-4 py-2 border border-primary text-primary rounded-md text-sm">Lihat Koleksi</a>
+            <a href="{{ route('leaderboard.index') }}" class="px-4 py-2 border text-slate-600 rounded-md text-sm">Lihat
+                Peringkat</a>
         </div>
     </div>
-
 </x-app-layout>
