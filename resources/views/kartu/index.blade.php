@@ -1,36 +1,40 @@
-@extends('layouts.main')
-@section('title', 'Koleksi Kartu - AquaQuest')
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+        <h1 class="text-xl font-semibold text-primary">Koleksi Kartu</h1>
+    </x-slot>
 
-<div class="relative left-1/2 -translate-x-1/2 w-screen -mt-8 -mb-4">
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6">
+        <p class="text-slate-600 mb-6">
+            Kamu memiliki <strong>{{ count($dimiliki) }}</strong> dari <strong>{{ $kartu->count() }}</strong> kartu.
+            Total XP: <strong>{{ $totalXp }}</strong>
+        </p>
 
-    {{-- Hero --}}
-    <div class="bg-gradient-to-r from-primary to-secondary">
-        <div class="px-6 py-10">
-            <h1 class="text-2xl md:text-3xl font-bold text-white">Koleksi Kartu</h1>
-            <p class="text-sm text-white/80">Total XP kamu: {{ $totalXp }}</p>
-        </div>
-    </div>
-
-    {{-- Galeri --}}
-    <div class="px-6 py-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @foreach ($kartu as $item)
-                @php $terbuka = $totalXp >= $item->xp_syarat; @endphp
+                @php $terbuka = in_array($item->id, $dimiliki); @endphp
 
-                <div class="bg-white rounded-2xl shadow-sm overflow-hidden text-center {{ $terbuka ? 'hover:shadow-xl hover:-translate-y-1 transition duration-200' : 'opacity-40 grayscale' }}">
-                    <div class="h-2 bg-gradient-to-r from-accent to-secondary"></div>
-                    <div class="p-5">
-                        <div class="text-4xl">{{ $terbuka ? '🐢' : '🔒' }}</div>
-                        <h3 class="font-bold text-primary mt-2">{{ $terbuka ? $item->nama : '???' }}</h3>
-                        <p class="text-xs text-gray-500 mt-1">
-                            {{ $terbuka ? $item->biota->nama : 'Butuh ' . $item->xp_syarat . ' XP' }}
+                <div class="bg-white rounded-lg shadow overflow-hidden text-center {{ $terbuka ? '' : 'opacity-60' }}">
+                    <div class="h-36 flex items-center justify-center" style="background:#CFFAFE">
+                        @if ($terbuka && $item->gambar_url)
+                            <img src="{{ $item->gambar_url }}" alt="{{ $item->nama }}" class="h-full w-full object-cover">
+                        @else
+                            <span class="text-5xl" aria-hidden="true">{{ $terbuka ? '🐢' : '🔒' }}</span>
+                        @endif
+                    </div>
+                    <div class="p-3">
+                        <h3 class="font-semibold text-sm {{ $terbuka ? 'text-primary' : 'text-slate-400' }}">
+                            {{ $terbuka ? $item->nama : 'Kartu Terkunci' }}
+                        </h3>
+                        <p class="text-xs text-slate-500 mt-1">
+                            @if ($terbuka)
+                                {{ $item->biota->nama }}
+                            @else
+                                Butuh {{ $item->xp_syarat }} XP (kurang {{ max(0, $item->xp_syarat - $totalXp) }})
+                            @endif
                         </p>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-</div>
-
-@endsection
+</x-app-layout>
