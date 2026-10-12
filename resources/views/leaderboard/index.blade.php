@@ -1,5 +1,7 @@
 <x-app-layout>
-
+    <x-slot name="header">
+        <h1 class="text-xl font-semibold text-primary">Peringkat</h1>
+    </x-slot>
     @php
         $daftar = collect(
             $pemain instanceof \Illuminate\Pagination\AbstractPaginator ? $pemain->items() : $pemain,
@@ -16,89 +18,79 @@
         ];
         $medali = ['🥇', '🥈', '🥉'];
     @endphp
-    <div class="relative left-1/2 -translate-x-1/2 w-screen pb-8 overflow-x-hidden">
-
-        {{-- Hero --}}
-        <div
-            class="relative overflow-hidden rounded-b-[3rem] bg-gradient-to-br from-primary via-primary to-secondary shadow-md">
-            <div class="absolute -right-16 -top-16 h-72 w-72 rounded-full bg-white/10"></div>
-            <div class="relative max-w-3xl mx-auto px-6 pt-12 pb-14">
-                <h1 class="text-5xl md:text-6xl font-extrabold leading-none text-white">Peringkat</h1>
-                <p class="mt-3 text-white/80">Siapa yang paling dalam menyelam? Diurutkan dari total XP tertinggi.</p>
+   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        @if ($daftar->isEmpty())
+            <div class="bg-white rounded-lg border border-slate-200 p-8 text-center">
+                <p class="text-base font-medium text-slate-700">Belum ada data peringkat</p>
+                <p class="text-xs text-slate-500 mt-1">Selesaikan kuis untuk mulai mengumpulkan poin.</p>
+                <a href="{{ route('kuis.index') }}"
+                    class="mt-4 inline-block rounded-md bg-[#0E7490] px-4 py-2 text-xs font-semibold text-white hover:bg-cyan-800 transition">
+                    Mulai Kuis
+                </a>
             </div>
-        </div>
-
-        <div class="max-w-3xl mx-auto px-6 py-10">
-            @if ($daftar->isEmpty())
-                <div class="py-12 text-center">
-                    <p class="text-5xl">🌊</p>
-                    <p class="mt-3 text-xl font-bold text-primary">Belum ada pemain di peringkat</p>
-                    <p class="text-sm text-gray-500 mt-1">Selesaikan satu kuis untuk jadi yang pertama.</p>
-                    <a href="{{ route('kuis.index') }}"
-                        class="mt-5 inline-block rounded-full bg-primary px-6 py-3 font-bold text-white hover:bg-secondary transition shadow-sm">Mulai
-                        kuis</a>
-                </div>
-            @else
-                {{-- Podium sebagai batang --}}
-                <div class="flex items-end justify-center gap-3 sm:gap-5">
+        @else
+            {{-- Top 3 Podium Minimalis --}}
+            <div class="bg-white rounded-lg border border-slate-200 p-6 mb-6">
+                <div class="flex items-end justify-center gap-4 sm:gap-8 pt-2">
                     @foreach ($podium as $i => $item)
                         @php $saya = auth()->id() === ($item->id ?? null); @endphp
-                        <div
-                            class="{{ $urutPodium[$i] }} w-28 sm:w-36 text-center transform transition hover:-translate-y-1 duration-300">
-                            <div class="text-4xl drop-shadow-md">{{ $medali[$i] }}</div>
-                            <p class="mt-1 font-bold text-primary truncate">{{ $item->name }}</p>
-                            @if ($saya)
-                                <span
-                                    class="inline-block rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-white shadow-sm">Kamu</span>
-                            @endif
-                            <p class="text-sm text-gray-500 tabular-nums">{{ number_format($item->total_xp) }} XP</p>
-                            <div
-                                class="mt-2 {{ $tinggiBar[$i] }} {{ $warnaBar[$i] }} rounded-t-2xl flex items-start justify-center pt-3 shadow-inner">
-                                <span
-                                    class="text-3xl font-extrabold text-white drop-shadow-md">{{ $i + 1 }}</span>
+                        <div class="{{ $urutPodium[$i] }} flex-1 max-w-[9rem] text-center">
+                            
+                            <div class="mb-2">
+                                {{-- Medali --}}
+                                <span class="text-2xl block mb-1" aria-hidden="true">{{ $medali[$i] }}</span>
+                                
+                                <p class="font-semibold text-slate-800 text-xs sm:text-sm truncate" title="{{ $item->name }}">{{ $item->name }}</p>
+                                @if ($saya)
+                                    <span class="inline-block rounded bg-teal-50 text-[#0E7490] border border-teal-200 px-1.5 py-0.5 text-[10px] font-medium">Kamu</span>
+                                @endif
+                                <p class="text-xs font-bold text-[#0E7490] mt-0.5 tabular-nums">{{ number_format($item->total_xp) }} XP</p>
+                            </div>
+
+                            <div class="{{ $tinggiBar[$i] }} {{ $i === 0 ? 'bg-[#0E7490]' : 'bg-slate-100 border-t border-x border-slate-200' }} rounded-t flex items-center justify-center">
+                                <span class="text-lg font-bold {{ $i === 0 ? 'text-white' : 'text-slate-400' }}">{{ $i + 1 }}</span>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="h-1 rounded-full bg-primary/15 shadow-sm"></div>
+            </div>
 
-                {{-- Posisi 4 dst: batang XP relatif --}}
-                @if ($lainnya->isNotEmpty())
-                    <ul class="mt-8 space-y-3">
-                        @foreach ($lainnya as $item)
-                            @php
-                                $saya = auth()->id() === ($item->id ?? null);
-                                $lebar = (int) round(($item->total_xp / $maks) * 100);
-                            @endphp
-                            <li
-                                class="relative overflow-hidden rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow bg-white">
-                                <div class="absolute inset-y-0 left-0 {{ $saya ? 'bg-secondary/25' : 'bg-accent/20' }} transition-all duration-1000 ease-out"
-                                    style="width: {{ $lebar }}%"></div>
-                                <div class="relative flex items-center gap-4 px-4 py-3">
-
-                                    <span
-                                        class="w-8 text-lg font-extrabold text-primary/40 tabular-nums">{{ $loop->iteration + 3 }}</span>
-
-                                    <span
-                                        class="flex-1 truncate {{ $saya ? 'font-bold text-primary' : 'text-slate-700' }}">
-                                        {{ $item->name }}
-                                        @if ($saya)
-                                            <span
-                                                class="ml-2 rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-white shadow-sm">Kamu</span>
-                                        @endif
-                                    </span>
-                                    <span
-                                        class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded">Level
-                                        {{ $item->level }}</span>
-                                    <span
-                                        class="w-20 text-right font-bold text-primary tabular-nums">{{ number_format($item->total_xp) }}</span>
-                                </div>
-                            </li>
+            {{-- Tabel Peringkat --}}
+            <div class="bg-white rounded-lg border border-slate-200 overflow-hidden">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase">
+                        <tr>
+                            <th class="px-4 py-3 w-12 text-center">#</th>
+                            <th class="px-4 py-3">Nama Pemain</th>
+                            <th class="px-4 py-3 text-center">Level</th>
+                            <th class="px-4 py-3 text-right">Total XP</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        @foreach ($daftar as $index => $item)
+                            @php $saya = auth()->id() === ($item->id ?? null); @endphp
+                            <tr class="{{ $saya ? 'bg-teal-50/50' : 'hover:bg-slate-50' }} transition-colors">
+                                <td class="px-4 py-3 text-center font-semibold {{ $index < 3 ? 'text-[#0E7490]' : 'text-slate-400' }}">
+                                    {{ $index + 1 }}
+                                </td>
+                                <td class="px-4 py-3 font-medium text-slate-800">
+                                    {{ $item->name }}
+                                    @if ($saya)
+                                        <span class="ml-1.5 rounded bg-teal-100 text-[#0E7490] px-1.5 py-0.5 text-[10px] font-semibold">Kamu</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-3 text-center text-xs text-slate-500">
+                                    Level {{ $item->level }}
+                                </td>
+                                <td class="px-4 py-3 text-right font-bold text-slate-700 tabular-nums">
+                                    {{ number_format($item->total_xp) }}
+                                </td>
+                            </tr>
                         @endforeach
-                    </ul>
-                @endif
-            @endif
-        </div>
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 
 </x-app-layout>
