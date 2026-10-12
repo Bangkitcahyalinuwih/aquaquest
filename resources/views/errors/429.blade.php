@@ -1,0 +1,1 @@
+<x-halaman-error kode="429" judul="Terlalu banyak permintaan" pesan="Tunggu sebentar lalu coba lagi." />
