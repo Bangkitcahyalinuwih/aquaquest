@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,24 +14,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            BiotaSeeder::class,
+            KontenEdukasiSeeder::class,
+            KartuSeeder::class,
+            SoalKuisSeeder::class,
+            PenggunaSeeder::class,
+        ]);
 
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        $biota = \App\Models\Biota::factory()->count(10)->create();
+        // $biota = \App\Models\Biota::factory()->count(10)->create();
 
-        $biota->each(function ($item) {
-            \App\Models\Kartu::factory()->create([
-                'biota_id' => $item->id,
-            ]);
-        });
+        // $biota->each(function ($item) {
+        //     \App\Models\Kartu::factory()->create([
+        //         'biota_id' => $item->id,
+        //     ]);
+        // });
 
-        \App\Models\KontenEdukasi::factory()->count(6)->create();
-        \App\Models\SoalKuis::factory()->count(15)->create();
+        // \App\Models\KontenEdukasi::factory()->count(6)->create();
+        // \App\Models\SoalKuis::factory()->count(15)->create();
 
         // \App\Models\Biota::factory()->count(10)->create();
     }
