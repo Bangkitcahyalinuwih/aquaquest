@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasGambarUrl;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Models\Concerns\HasGambarUrl;
 
 class Biota extends Model
 {
@@ -15,6 +15,7 @@ class Biota extends Model
     // Kolom yang boleh diisi lewat Biota::create([...]). Ini pengaman: kolom di luar
     // daftar ini akan DITOLAK walau ada di request, mencegah orang iseng mengisi kolom lain.
     protected $table = 'biota';
+
     protected $fillable = [
         'nama',
         'nama_latin',
@@ -39,8 +40,9 @@ class Biota extends Model
     // Setelah ini, kamu bisa tulis $biota->kontenEdukasi untuk ambil semua artikel terkait biota itu.
     public function kontenEdukasi(): HasMany
     {
-        return $this->hasMany(KontenEdukasi::class, 'biota_id');  // foreign key di tabel konten_edukasi    
+        return $this->hasMany(KontenEdukasi::class, 'biota_id');  // foreign key di tabel konten_edukasi
     }
+
     public function soalKuis(): HasMany
     {
         return $this->hasMany(SoalKuis::class);

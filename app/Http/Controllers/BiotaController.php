@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Biota;
+use Illuminate\Http\Request;
 
 class BiotaController extends Controller
 {
@@ -16,10 +16,10 @@ class BiotaController extends Controller
 
         $biota = Biota::query()
             ->when($request->filled('q'), function ($query) use ($request) {
-                $kata = '%' . $request->q . '%';
-                $query->where(fn($w) => $w->where('nama', 'like', $kata)->orWhere('nama_latin', 'like', $kata));
+                $kata = '%'.$request->q.'%';
+                $query->where(fn ($w) => $w->where('nama', 'like', $kata)->orWhere('nama_latin', 'like', $kata));
             })
-            ->when($request->filled('kategori'), fn($query) => $query->where('kategori', $request->kategori))
+            ->when($request->filled('kategori'), fn ($query) => $query->where('kategori', $request->kategori))
             ->orderBy('nama')
             ->paginate(9)
             ->withQueryString();

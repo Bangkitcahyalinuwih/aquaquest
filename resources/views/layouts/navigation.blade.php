@@ -29,7 +29,10 @@
     }
 @endphp
 
-<nav x-data="{ buka: false, dropdown: false }" class="bg-white border-b shadow-sm">
+<nav x-data="{ buka: false, dropdown: false, atTop: true }" 
+     x-init="atTop = (window.pageYOffset || document.documentElement.scrollTop) < 20; window.addEventListener('scroll', () => { atTop = (window.pageYOffset || document.documentElement.scrollTop) < 20 })"
+     :class="atTop ? 'bg-white border-b shadow-sm' : 'bg-white/30 backdrop-blur-md border-b border-white/20 shadow-none'"
+     class="sticky top-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex justify-between h-16 items-center">
 

@@ -4,13 +4,13 @@ use App\Http\Middleware\EnsureUserHasRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../routes/web.php',
-        commands: __DIR__ . '/../routes/console.php',
+        web: __DIR__.'/../routes/web.php',
+        commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
             Route::middleware(['web', 'auth', 'role:admin'])
@@ -26,7 +26,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->redirectUsersTo(
-            fn(Request $request) => $request->user()?->role === 'admin'
+            fn (Request $request) => $request->user()?->role === 'admin'
                 ? route('admin.dashboard')
                 : route('dashboard')
         );

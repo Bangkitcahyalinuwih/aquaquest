@@ -13,8 +13,8 @@ class KontenEdukasiController extends Controller
 
         $konten = KontenEdukasi::query()
             ->when($request->filled('q'), function ($query) use ($request) {
-                $kata = '%' . $request->q . '%';
-                $query->where(fn($w) => $w->where('judul', 'like', $kata)->orWhere('isi', 'like', $kata));
+                $kata = '%'.$request->q.'%';
+                $query->where(fn ($w) => $w->where('judul', 'like', $kata)->orWhere('isi', 'like', $kata));
             })
             ->latest()
             ->paginate(9)

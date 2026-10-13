@@ -16,13 +16,13 @@ test('alur kuis lengkap menambah xp dan tidak membocorkan kunci jawaban', functi
 
     foreach ($mulai->json('soal') as $soal) {
         $this->actingAs($user)
-            ->postJson('/kuis/' . $mulai->json('game_id') . '/jawab', ['soal_id' => $soal['id'], 'pilihan' => 'a'])
+            ->postJson('/kuis/'.$mulai->json('game_id').'/jawab', ['soal_id' => $soal['id'], 'pilihan' => 'a'])
             ->assertOk()
             ->assertJson(['benar' => true]);
     }
 
     $this->actingAs($user)
-        ->postJson('/kuis/' . $mulai->json('game_id') . '/selesai')
+        ->postJson('/kuis/'.$mulai->json('game_id').'/selesai')
         ->assertOk()
         ->assertJson(['jumlah_benar' => 5, 'xp_didapat' => 50, 'level' => 1]);
 

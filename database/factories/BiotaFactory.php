@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Biota;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<Biota>
@@ -22,7 +23,7 @@ class BiotaFactory extends Factory
         return [
             'nama' => ucwords($nama),
             'nama_latin' => fake()->words(2, true),
-            'slug' => \Illuminate\Support\Str::slug($nama),   // "terumbu biru" jadi "terumbu-biru"
+            'slug' => Str::slug($nama),   // "terumbu biru" jadi "terumbu-biru"
             'kategori' => fake()->randomElement(['Ikan', 'Mamalia Laut', 'Terumbu Karang', 'Moluska']),
             'deskripsi' => fake()->paragraph(),
             'habitat' => fake()->randomElement(['Laut dangkal', 'Laut dalam', 'Terumbu karang', 'Pesisir']),

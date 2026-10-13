@@ -17,7 +17,8 @@
             <button type="submit" class="px-5 py-2 bg-primary text-white rounded-md hover:bg-cyan-800">Cari</button>
             @if (request()->filled('q') || request()->filled('kategori'))
                 <a href="{{ route('biota.index') }}"
-                    class="px-3 py-2 text-sm text-slate-600 hover:underline self-center">Reset</a>
+                   <button type="submit" class="px-5 py-2 bg-primary text-white rounded-md hover:bgcyan-800">Reset</button>
+                </a>
             @endif
         </form>
 

@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 class KuisService
 {
     private const JUMLAH_SOAL = 5;
+
     private const DURASI_DETIK = 300; // 5 menit
 
     public function __construct(
@@ -70,7 +71,6 @@ class KuisService
 
         return ['benar' => $benar, 'jawaban_benar' => $soal->jawaban_benar];
     }
-
 
     public function selesai(GameHistory $game): array
     {
