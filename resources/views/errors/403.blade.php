@@ -1,0 +1,1 @@
+<x-halaman-error kode="403" judul="Akses ditolak" pesan="Kamu tidak punya izin untuk membuka halaman ini." />
