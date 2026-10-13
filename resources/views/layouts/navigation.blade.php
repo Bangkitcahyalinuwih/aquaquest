@@ -34,9 +34,12 @@
         <div class="flex justify-between h-16 items-center">
 
             {{-- Logo --}}
-            <a href="{{ $admin ? $url('admin.dashboard') : $url('home') }}"
-                class="flex items-center gap-2 text-xl font-bold text-primary">
-                <span aria-hidden="true">🌊</span> AquaQuest
+           <a href="{{ $admin ? $url('admin.dashboard') : $url('home') }}"
+                class="flex items-center gap-2 text2xl font-bold text-primary">
+                <img src="{{ asset('images/logo-aquaquest.png') }}" 
+                     alt="AquaQuest Logo" 
+                     class="h-12 sm:h-16 w-auto mix-blend-multiply drop-shadow-sm">
+                <span>AquaQuest</span>
             </a>
 
             {{-- Menu desktop --}}
