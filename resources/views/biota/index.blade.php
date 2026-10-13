@@ -24,11 +24,12 @@
         @if ($biota->isEmpty())
             <div class="bg-white rounded-lg shadow p-10 text-center text-slate-500">
                 Tidak ada biota yang cocok dengan pencarianmu.
-            </div>
-        @else
+         @else
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 @foreach ($biota as $item)
-                    <x-biota-card :biota="$item" />
+                    <div class="transform transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl rounded-xl">
+                        <x-biota-card :biota="$item" />
+                    </div>
                 @endforeach
             </div>
             <div class="mt-6">{{ $biota->links() }}</div>

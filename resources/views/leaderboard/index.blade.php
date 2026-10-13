@@ -71,7 +71,7 @@
                             @php $saya = auth()->id() === ($item->id ?? null); @endphp
                             <tr class="{{ $saya ? 'bg-teal-50/50' : 'hover:bg-slate-50' }} transition-colors">
                                 <td class="px-4 py-3 text-center font-semibold {{ $index < 3 ? 'text-[#0E7490]' : 'text-slate-400' }}">
-                                    {{ $index + 1 }}
+                                    {{ $index + 4 }}
                                 </td>
                                 <td class="px-4 py-3 font-medium text-slate-800">
                                     {{ $item->name }}

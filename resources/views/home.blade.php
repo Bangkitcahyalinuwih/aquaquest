@@ -109,9 +109,28 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 @foreach ($edukasiTerbaru as $artikel)
                     <a href="{{ route('edukasi.show', $artikel) }}"
-                        class="bg-white rounded-lg shadow p-5 hover:shadow-md transition">
-                        <h3 class="font-semibold text-primary">{{ $artikel->judul }}</h3>
-                        <p class="mt-2 text-sm text-slate-600">{{ Str::limit($artikel->isi, 110) }}</p>
+                        class="bg-white rounded-lg shadow overflow-hidden hover:shadow-md transition flex flex-col">
+                        
+                        <div class="h-40 w-full overflow-hidden bg-slate-100">
+                            @if ($artikel->gambar_url)
+                                <img src="{{ $artikel->gambar_url }}" 
+                                    alt="{{ $artikel->judul }}" 
+                                    class="w-full h-full object-cover">
+                            @else
+                                <div class="w-full h-full flex items-center justify-center text-slate-400">
+                                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h3 class="font-semibold text-primary line-clamp-2">{{ $artikel->judul }}</h3>
+                                <p class="mt-2 text-sm text-slate-600">{{ Str::limit(strip_tags($artikel->isi), 110) }}</p>
+                            </div>
+                        </div>
                     </a>
                 @endforeach
             </div>

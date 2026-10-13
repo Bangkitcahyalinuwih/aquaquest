@@ -14,11 +14,18 @@
                 @php $terbuka = in_array($item->id, $dimiliki); @endphp
 
                 <div class="bg-white rounded-lg shadow overflow-hidden text-center {{ $terbuka ? '' : 'opacity-60' }}">
-                    <div class="h-36 flex items-center justify-center" style="background:#CFFAFE">
-                        @if ($terbuka && $item->gambar_url)
-                            <img src="{{ $item->gambar_url }}" alt="{{ $item->nama }}" class="h-full w-full object-cover">
+                    <div class="h-36 flex items-center justify-center relative" style="background:#CFFAFE">
+                       
+                        @if ($item->gambar_url)
+                            <img src="{{ $item->gambar_url }}" alt="{{ $item->nama }}" class="h-full w-full object-cover {{ $terbuka ? '' : 'blur-sm filter brightness-75' }}">
                         @else
-                            <span class="text-5xl" aria-hidden="true">{{ $terbuka ? '🐢' : '🔒' }}</span>
+                            <span class="text-5xl" aria-hidden="true">🐢</span>
+                        @endif
+
+                        @if (!$terbuka)
+                            <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+                                <span class="text-4xl drop-shadow-md" aria-hidden="true">🔒</span>
+                            </div>
                         @endif
                     </div>
                     <div class="p-3">
