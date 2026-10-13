@@ -314,12 +314,12 @@ hijau diturunkan ke Least Concern pada 2025). Koordinat biota adalah perkiraan l
 
 ## Tim dan tanggung jawab
 
-| Nama                       | NIM       | Peran                   | Tanggung jawab utama                                                                                                                                                                                                             |
-| -------------------------- | --------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Bangkit Cahya Linuwih      | 254311027 | Backend dan Repo Master | Pengaturan repositori dan Git Flow, mesin kuis (`KuisService`, `LevelService`, `KartuService`), tabel kuis/kartu/riwayat game, CRUD admin soal dan kartu, seeder data riil, hardening dan performa, dokumentasi, rilis dan demo  |
-| Aisyah Nur Fadillah (Dila) | 254311001 | Backend                 | Migration dan model inti (users, biota, konten edukasi), middleware peran dan routing admin, CRUD admin biota dan edukasi, unggah gambar, pencarian, leaderboard dan dashboard (sisi backend), bahasa Indonesia, pengujian akses |
-| Abdul Aziz Mushthofa       | 254311015 | UI/UX dan Frontend      | Layout dan navbar terpadu, peta Leaflet, tampilan panel admin (4 modul dan dashboard), halaman kuis dengan Alpine.js (timer, tebak gambar, penanganan error)                                                                     |
-| Silfina Nur Fadilah        | 254311007 | UI/UX dan Frontend      | Ensiklopedia dan materi edukasi, beranda, galeri koleksi kartu, leaderboard dan dashboard pengguna, halaman error, tema komponen, halaman auth berbahasa Indonesia                                                               |
+| Nama                  | NIM       | Peran                   | Tanggung jawab utama                                                                                                                                                                                                             |
+| --------------------- | --------- | ----------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Bangkit Cahya Linuwih | 254311027 | Backend dan Repo Master | Pengaturan repositori dan Git Flow, mesin kuis (`KuisService`, `LevelService`, `KartuService`), tabel kuis/kartu/riwayat game, CRUD admin soal dan kartu, seeder data riil, hardening dan performa, dokumentasi, rilis dan demo  |
+| Aisyah Nur Fadillah   | 254311001 | Backend                 | Migration dan model inti (users, biota, konten edukasi), middleware peran dan routing admin, CRUD admin biota dan edukasi, unggah gambar, pencarian, leaderboard dan dashboard (sisi backend), bahasa Indonesia, pengujian akses |
+| Abdul Aziz Mushthofa  | 254311015 | UI/UX dan Frontend      | Layout dan navbar terpadu, peta Leaflet, tampilan panel admin (4 modul dan dashboard), halaman kuis dengan Alpine.js (timer, tebak gambar, penanganan error)                                                                     |
+| Silfina Nur Fadilah   | 254311007 | UI/UX dan Frontend      | Ensiklopedia dan materi edukasi, beranda, galeri koleksi kartu, leaderboard dan dashboard pengguna, halaman error, tema komponen, halaman auth berbahasa Indonesia                                                               |
 
 ## Kredit dan lisensi
 
