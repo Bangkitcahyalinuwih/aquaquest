@@ -43,7 +43,7 @@ kartu koleksi. Dinas terkait mengelola seluruh konten lewat panel admin. Proyek 
 | Detail biota dengan peta lokasi                    | Kuis dengan timer                                        |
 | ![Hasil kuis](docs/screenshots/hasil-kuis.png)     | ![Koleksi kartu](docs/screenshots/koleksi.png)           |
 | Hasil kuis: XP, level, kartu baru                  | Koleksi kartu                                            |
-| ![Dashboard](docs/screenshots/dashboard-user.png)  | ![Dashboard admin](docs/screenshots/admin-dashboard.png) |
+| ![Dashboard](docs/screenshots/dashboard-user.png)  | ![Dashboard admin](docs/screenshots/admin-dashboard.jpg) |
 | Dashboard pengguna                                 | Dashboard admin                                          |
 
 ## Latar belakang dan tujuan
@@ -144,7 +144,7 @@ docs/                      dokumentasi pendukung
 **Prasyarat:** PHP 8.3 (ekstensi mbstring, xml, curl, mysql, gd, intl, zip), Composer 2, Node 22, MySQL 8, Git.
 
 ```bash
-git clone <URL-REPO> aquaquest
+git clone <https://github.com/Bangkitcahyalinuwih/aquaquest.git>
 cd aquaquest
 
 composer install
