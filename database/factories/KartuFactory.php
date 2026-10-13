@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Biota;
 use App\Models\Kartu;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,8 +19,8 @@ class KartuFactory extends Factory
     public function definition(): array
     {
         return [
-            'biota_id' => \App\Models\Biota::factory(),
-            'nama' => 'Kartu ' . fake()->words(2, true),
+            'biota_id' => Biota::factory(),
+            'nama' => 'Kartu '.fake()->words(2, true),
             'gambar' => $this->faker->imageUrl(640, 480, 'animals', true),
             'xp_syarat' => fake()->randomElement([50, 100, 150, 200, 250]),
         ];

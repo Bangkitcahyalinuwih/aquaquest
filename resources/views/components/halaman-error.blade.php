@@ -66,7 +66,10 @@
 
 <body>
     <main>
-        <p class="emoji">🌊</p>
+       <img src="{{ asset('images/logo-aquaquest.png') }}" 
+            alt="AquaQuest Logo" 
+            style="height: 110px !important; width: auto !important;"
+            class="mx-auto mb-4 mix-blend-multiply drop-shadow-sm">
         <p class="kode">{{ $kode }}</p>
         <h1>{{ $judul }}</h1>
         <p>{{ $pesan }}</p>

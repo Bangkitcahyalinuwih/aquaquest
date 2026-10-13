@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Biota;
 use App\Models\SoalKuis;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,9 +19,9 @@ class SoalKuisFactory extends Factory
     public function definition(): array
     {
         return [
-            'biota_id' => \App\Models\Biota::inRandomOrder()->first()?->id,
+            'biota_id' => Biota::inRandomOrder()->first()?->id,
             'tipe' => 'teks',
-            'pertanyaan' => fake()->sentence() . '?',
+            'pertanyaan' => fake()->sentence().'?',
             'gambar' => null,
             'opsi_a' => fake()->word(),
             'opsi_b' => fake()->word(),

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\KontenEdukasi;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
  * @extends Factory<KontenEdukasi>
@@ -22,7 +23,7 @@ class KontenEdukasiFactory extends Factory
         return [
             'biota_id' => null,
             'judul' => $judul,
-            'slug' => \Illuminate\Support\Str::slug($judul),
+            'slug' => Str::slug($judul),
             'isi' => fake()->paragraphs(3, true),
             'gambar' => null,
         ];

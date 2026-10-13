@@ -1,9 +1,10 @@
 <?php
 
-use App\Models\User;
 use App\Models\Biota;
+use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+
 use function Pest\Laravel\actingAs;
 
 test('user biasa tidak bisa akses admin biota', function () {

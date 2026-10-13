@@ -11,7 +11,7 @@ class SlugService
      * Buat slug unik. Jika "penyu-hijau" sudah ada, hasilnya "penyu-hijau-2", dst.
      * Tanpa ini, dua biota bernama sama membuat database error 500 (kolom slug unik).
      *
-     * @param class-string<Model> $model
+     * @param  class-string<Model>  $model
      */
     public function unik(string $model, string $teks): string
     {
@@ -20,7 +20,7 @@ class SlugService
         $urut = 2;
 
         while ($model::query()->where('slug', $slug)->exists()) {
-            $slug = $dasar . '-' . $urut++;
+            $slug = $dasar.'-'.$urut++;
         }
 
         return $slug;

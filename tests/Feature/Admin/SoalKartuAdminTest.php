@@ -72,7 +72,7 @@ test('admin dapat menambah kartu dan satu biota hanya boleh punya satu kartu', f
     $admin = User::factory()->create(['role' => 'admin']);
     $biota = Biota::factory()->create();
 
-    $data = fn() => [
+    $data = fn () => [
         'biota_id' => $biota->id,
         'nama' => 'Kartu Uji',
         'xp_syarat' => 100,

@@ -44,7 +44,7 @@ class KartuAdminController extends Controller
 
     public function edit(Kartu $kartu)
     {
-        $daftarBiota = Biota::where(fn($q) => $q->doesntHave('kartu')->orWhere('id', $kartu->biota_id))
+        $daftarBiota = Biota::where(fn ($q) => $q->doesntHave('kartu')->orWhere('id', $kartu->biota_id))
             ->orderBy('nama')
             ->get(['id', 'nama']);
 

@@ -1,9 +1,11 @@
 <?php
 
 use App\Models\GameHistory;
+use App\Models\Kartu;
 use App\Models\SoalKuis;
 use App\Models\User;
 use App\Services\KuisService;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 test('jawaban ditolak setelah deadline lewat', function () {
     $user = User::factory()->create();
@@ -19,7 +21,7 @@ test('jawaban ditolak setelah deadline lewat', function () {
     ]);
 
     app(KuisService::class)->jawab($game, $soal->id, 'a');
-})->throws(\Symfony\Component\HttpKernel\Exception\HttpException::class);
+})->throws(HttpException::class);
 
 test('soal yang bukan bagian sesi ditolak', function () {
     $user = User::factory()->create();
@@ -36,7 +38,7 @@ test('soal yang bukan bagian sesi ditolak', function () {
     ]);
 
     app(KuisService::class)->jawab($game, $soalLuarSesi->id, 'a');
-})->throws(\Symfony\Component\HttpKernel\Exception\HttpException::class);
+})->throws(HttpException::class);
 
 test('xp tidak bertambah di sesi kedua pada hari yang sama', function () {
     $user = User::factory()->create(['total_xp' => 0]);
@@ -72,7 +74,7 @@ test('xp tidak bertambah di sesi kedua pada hari yang sama', function () {
 
 test('kartu terbuka otomatis saat xp mencapai syarat', function () {
     $user = User::factory()->create(['total_xp' => 90]);
-    $kartu = \App\Models\Kartu::factory()->create(['xp_syarat' => 100]);
+    $kartu = Kartu::factory()->create(['xp_syarat' => 100]);
     $soal = SoalKuis::factory()->create(['jawaban_benar' => 'a', 'poin' => 10, 'biota_id' => $kartu->biota_id]);
 
     $game = GameHistory::create([
