@@ -8,11 +8,10 @@ use App\Models\User;
 
 class KartuService
 {
-
     public function bukaKartuBaru(User $user): array
     {
         $kartuBelumDimiliki = Kartu::where('xp_syarat', '<=', $user->total_xp)
-            ->whereDoesntHave('koleksiKartu', fn($q) => $q->where('user_id', $user->id))
+            ->whereDoesntHave('koleksiKartu', fn ($q) => $q->where('user_id', $user->id))
             ->get();
 
         foreach ($kartuBelumDimiliki as $kartu) {

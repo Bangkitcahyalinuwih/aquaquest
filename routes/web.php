@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BiotaController;
-use App\Http\Controllers\KontenEdukasiController;
-use App\Http\Controllers\KartuController;
-use App\Http\Controllers\QuizController;
-use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KartuController;
+use App\Http\Controllers\KontenEdukasiController;
+use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -37,4 +37,4 @@ Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->
 
 Route::get('/koleksi', [KartuController::class, 'index'])->name('kartu.index')->middleware('auth');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
