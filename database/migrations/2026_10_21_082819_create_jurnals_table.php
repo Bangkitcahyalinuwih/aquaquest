@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('kondisi', ['sehat', 'terluka', 'langka']);
             $table->text('catatan');
             $table->timestamps();
+            $table->enum('jenis', ['ikan', 'terumbu_karang', 'moluska']);
         });
     }
 

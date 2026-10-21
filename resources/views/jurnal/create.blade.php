@@ -34,6 +34,20 @@
                 @enderror
             </div>
 
+           <div>
+                <label for="jenis" class="block mb-2 text-sm font-semibold text-slate-700">Jenis Biota</label>
+                <select name="jenis" id="jenis"
+                    class="w-full rounded-xl border @error('kondisi') border-red-500 bg-red-50/30 @else border-slate-300 bg-slate-50 @enderror p-3 text-sm focus:ring-cyan-500 focus:border-cyan-500">
+                    <option value="">-- Pilih Jenis --</option>
+                    <option value="ikan" {{ old('kondisi') === 'ikan' ? 'selected' : '' }}>Ikan</option>
+                    <option value="terumbu_karang" {{ old('kondisi') === 'terumbu_karang' ? 'selected' : '' }}>Terumbu Karang</option>
+                    <option value="moluska" {{ old('kondisi') === 'moluska' ? 'selected' : '' }}>Moluska</option>
+                </select>
+                @error('jenis')
+                    <p class="mt-1.5 text-xs text-red-600 font-medium">{{ $message }}</p>
+                @enderror
+            </div>
+
             <div>
                 <label for="kondisi" class="block mb-2 text-sm font-semibold text-slate-700">Kondisi Biota Saat Ditemukan</label>
                 <select name="kondisi" id="kondisi"

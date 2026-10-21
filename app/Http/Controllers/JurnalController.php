@@ -31,8 +31,9 @@ class JurnalController extends Controller
         $validated = $request->validate([
             'nama_biota' => 'required|string|max:255',
             'lokasi'     => 'required|string|max:255',
-            'kondisi'    => 'required|in:sehat,terluka,langka',
+            'kondisi'    => 'required|in:sehat,terluka,langka,punah',
             'catatan'    => 'required|string|min:10',
+            'jenis'      => 'required|in:ikan,terumbu_karang,moluska'
         ]);
 
         // Menyisipkan ID user yang sedang login ke dalam data yang akan disimpan
@@ -58,8 +59,9 @@ class JurnalController extends Controller
         $validated = $request->validate([
             'nama_biota' => 'required|string|max:255',
             'lokasi'     => 'required|string|max:255',
-            'kondisi'    => 'required|in:sehat,terluka,langka',
+            'kondisi'    => 'required|in:sehat,terluka,langka,punah',
             'catatan'    => 'required|string|min:10',
+            'jenis'      => 'required|in:ikan,terumbu_karang,moluska'
         ]);
 
         $jurnal->update($validated);
