@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             KartuSeeder::class,
             SoalKuisSeeder::class,
             PenggunaSeeder::class,
+            KomentarSeeder::class,
         ]);
 
         // User::factory(10)->create();
