@@ -52,4 +52,9 @@ class Biota extends Model
     {
         return $this->hasOne(Kartu::class);
     }
+
+    public function komentar(): HasMany
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

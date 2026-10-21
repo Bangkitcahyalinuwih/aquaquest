@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(KoleksiKartu::class);
     }
+
+    public function komenter(): HasMany
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }
