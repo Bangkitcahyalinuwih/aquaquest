@@ -168,6 +168,10 @@ return [
     'url' => 'Format :attribute tidak valid.',
     'uuid' => ':Attribute harus merupakan UUID yang valid.',
     'attributes' => [
+        'konten_edukasi_id' => 'artikel',
+        'ringkasan' => 'ringkasan',
+        'status' => 'status',
+        'rating' => 'rating',
         'address' => 'alamat',
         'affiliate_url' => 'URL afiliasi',
         'age' => 'usia',

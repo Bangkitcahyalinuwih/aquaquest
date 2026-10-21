@@ -9,12 +9,6 @@
             </a>
         </div>
 
-        {{-- @if (session('status'))
-            <div class="mb-5 rounded-md bg-green-50 border border-green-200 px-4 py-3 text-sm text-green-700">
-                {{ session('status') }}
-            </div>
-        @endif --}}
-
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4">
                 <p class="text-sm text-slate-500">Total jurnal</p>
@@ -50,6 +44,7 @@
                             <th class="px-4 py-3 font-medium">Ringkasan</th>
                             <th class="px-4 py-3 font-medium text-center">Rating</th>
                             <th class="px-4 py-3 font-medium">Status</th>
+                            <th class="px-4 py-3 font-medium">Target</th> <!-- Kolom Target Baru -->
                             <th class="px-4 py-3 font-medium text-right">Aksi</th>
                         </tr>
                     </thead>
@@ -65,6 +60,9 @@
                                     @else
                                         <span class="inline-block rounded-full bg-yellow-100 text-yellow-700 px-3 py-1 text-xs font-medium">Sedang dibaca</span>
                                     @endif
+                                </td>
+                                <td class="px-4 py-3 text-slate-600">
+                                    {{ $item->target_selesai ? $item->target_selesai->format('d M Y') : '-' }}
                                 </td>
                                 <td class="px-4 py-3">
                                     <div class="flex justify-end items-center gap-3">

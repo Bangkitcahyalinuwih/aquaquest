@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('jurnal_belajar', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('konten_edukasi_id')->constrained('konten_edukasi')->cascadeOnDelete();
+            $table->foreignId('konten_edukasi_id')->constrained('konten_edukasi')->cascadeOnDelete(); // Foreign key ke tabel konten_edukasi. Jika artikel dihapus admin, jurnal terkait ikut terhapus agar tidak jadi data yatim (orphan)
             $table->text('ringkasan');
             $table->unsignedTinyInteger('rating')->nullable();
             $table->enum('status', ['sedang_dibaca', 'selesai'])->default('sedang_dibaca');
             $table->timestamps();
 
-            $table->unique(['user_id', 'konten_edukasi_id']);
+            $table->unique(['user_id', 'konten_edukasi_id']); // Mencegah 1 user yang sama membuat 2 jurnal untuk 1 artikel yang sama
         });
     }
 

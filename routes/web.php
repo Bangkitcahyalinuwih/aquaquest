@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/kuis/mulai', [QuizController::class, 'mulai'])->name('kuis.mulai');
         Route::post('/kuis/{game}/jawab', [QuizController::class, 'jawab'])->name('kuis.jawab');
         Route::post('/kuis/{game}/selesai', [QuizController::class, 'selesai'])->name('kuis.selesai');
+
+        // Route::resource('jurnal', JurnalBelajarController::class)->except('show')->middleware('auth');
     });
 });
 
@@ -41,3 +43,4 @@ Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leade
 require __DIR__ . '/auth.php';
 
 Route::resource('jurnal', JurnalBelajarController::class)->except('show');
+Route::resource('jurnal', JurnalBelajarController::class)->except('show')->middleware('auth');
