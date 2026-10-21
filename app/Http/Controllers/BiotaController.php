@@ -16,10 +16,10 @@ class BiotaController extends Controller
 
         $biota = Biota::query()
             ->when($request->filled('q'), function ($query) use ($request) {
-                $kata = '%'.$request->q.'%';
-                $query->where(fn ($w) => $w->where('nama', 'like', $kata)->orWhere('nama_latin', 'like', $kata));
+                $kata = '%' . $request->q . '%';
+                $query->where(fn($w) => $w->where('nama', 'like', $kata)->orWhere('nama_latin', 'like', $kata));
             })
-            ->when($request->filled('kategori'), fn ($query) => $query->where('kategori', $request->kategori))
+            ->when($request->filled('kategori'), fn($query) => $query->where('kategori', $request->kategori))
             ->orderBy('nama')
             ->paginate(9)
             ->withQueryString();
@@ -32,10 +32,12 @@ class BiotaController extends Controller
     // Dipanggil saat orang buka GET /biota/{slug}, misal /biota/penyu-hijau
     public function show(Biota $biota)
     {
-        // Laravel OTOMATIS mencari baris biota dengan slug yang cocok dari URL,
-        // berkat getRouteKeyName() yang kamu tulis di model tadi.
-        // Kalau tidak ketemu, otomatis muncul halaman 404 — kamu tidak perlu cek manual.
 
-        return view('biota.show', compact('biota'));
+        $komentar = $biota->komentar()
+            ->with('user:id,name')      // eager loading: satu query tambahan, bukan satu per komentar (N+1)
+            ->latest()
+            ->paginate(5);
+
+        return view('biota.show', compact('biota', 'komentar'));
     }
 }
