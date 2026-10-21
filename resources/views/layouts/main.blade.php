@@ -46,6 +46,9 @@
                     <li>
                         <a href="#" class="{{ $biasa }}">Game & Kuis</a>
                     </li>
+                    <li>
+                        <a href="{{ route('jurnal.index') }}" class="{{ request()->routeIs('jurnal.*') ? $aktif : $biasa }}">Jurnal Penyelam</a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -12,6 +12,7 @@
             ['Kelola Edukasi', 'admin.edukasi.index', 'admin.edukasi.*'],
             ['Kelola Soal', 'admin.soal.index', 'admin.soal.*'],
             ['Kelola Kartu', 'admin.kartu.index', 'admin.kartu.*'],
+            ['Jurnal Penyelam', 'jurnal.index', 'admin.jurnal'],
         ];
     } else {
         $menu = [
@@ -19,6 +20,7 @@
             ['Ensiklopedia', 'biota.index', 'biota.*'],
             ['Materi Edukasi', 'edukasi.index', 'edukasi.*'],
             ['Kuis', 'kuis.index', 'kuis.*'],
+            ['Jurnal Penyelam', 'jurnal.index', 'jurnal.*'],
         ];
 
         if ($pengguna) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JurnalController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -38,3 +39,6 @@ Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->
 Route::get('/koleksi', [KartuController::class, 'index'])->name('kartu.index')->middleware('auth');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 require __DIR__.'/auth.php';
+Route::middleware('auth')->group(function () {
+    Route::resource('jurnal', JurnalController::class)->except(['show']);
+});
