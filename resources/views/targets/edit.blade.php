@@ -47,6 +47,21 @@
                     @enderror
                 </div>
 
+                {{-- Deskripsi Target --}}
+                <div>
+                    <label for="deskripsi" class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi Target</label>
+                    <textarea 
+                        name="deskripsi" 
+                        id="deskripsi" 
+                        rows="3" 
+                        class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm"
+                        placeholder="Catatan tambahan target..."
+                    >{{ old('deskripsi', $target->deskripsi) }}</textarea>
+                    @error('deskripsi')
+                        <p class="text-rose-500 text-xs font-medium mt-1.5">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="flex items-center justify-between pt-4 border-t border-slate-100 mt-6">
                     <a href="{{ route('targets.index') }}" class="text-sm font-semibold text-slate-500 hover:text-slate-700">Batal</a>
                     <button type="submit" class="bg-primary hover:bg-cyan-800 text-white text-sm font-semibold px-6 py-2.5 rounded-xl shadow-md transition-all">

@@ -9,13 +9,15 @@ use Illuminate\Http\Request;
 class QuizController extends Controller
 {
     public function index()
-    {
-        return view('kuis.index');
+    {   
+        $aziz_ganteng = "mas aziz trpl";
+        return view('kuis.index', compact('aziz_ganteng'));
     }
 
     public function mulai(Request $request, KuisService $kuisService)
     {
         $game = $kuisService->mulai($request->user());
+       
 
         return response()->json([
             'game_id' => $game->id,

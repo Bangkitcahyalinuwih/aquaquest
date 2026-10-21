@@ -56,7 +56,9 @@
                         <p class="text-rose-500 text-xs font-medium mt-1.5">{{ $message }}</p>
                     @enderror
                 </div>
-
+                
+                <textarea name="deskripsi" class="w-full rounded-md border-slate-300" placeholder="Deskripsi target (opsional)"></textarea>
+                
                 {{-- Pilihan Kuis --}}
                 <div x-show="kategori === 'Kuis'" x-cloak class="p-4 bg-cyan-50 rounded-xl border border-cyan-100 text-xs text-cyan-800">
                     💡 Langsung Simpan

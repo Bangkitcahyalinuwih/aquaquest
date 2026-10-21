@@ -27,6 +27,7 @@ class TargetController extends Controller
     {
         $request->validate([
             'kategori' => 'required|in:Kuis,Ensiklopedia,Materi Edukasi',
+            'deskripsi' => 'nullable|string|max:255',
         ]);
 
         $userId = auth()->id();
@@ -68,6 +69,7 @@ class TargetController extends Controller
             'kategori' => $kategori,
             'ref_id' => $refId,
             'status' => 'Belum Selesai',
+            'deskripsi' => $request->input('deskripsi', null),
         ]);
 
         return redirect()->route('targets.index')->with('success', 'Target belajar berhasil ditambahkan!');
@@ -80,15 +82,16 @@ class TargetController extends Controller
 
     public function update(Request $request, Target $target)
     {
-        $request->validate([
-            'status' => 'required|in:Belum Selesai,Selesai',
+        $validated = $request->validate([
+            'judul_target' => 'required|string|max:255',
+            'kategori'     => 'required|string',
+            'status'       => 'required|in:Belum Selesai,Selesai',
+            'deskripsi'    => 'nullable|string|max:255',
         ]);
 
-        $target->update([
-            'status' => $request->status,
-        ]);
+        $target->update($validated);
 
-        return redirect()->route('targets.index')->with('success', 'Status target berhasil diperbarui!');
+        return redirect()->route('targets.index')->with('success', 'Target berhasil diperbarui!');
     }
 
     public function destroy(Target $target)

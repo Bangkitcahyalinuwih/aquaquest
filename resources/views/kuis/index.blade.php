@@ -132,6 +132,15 @@
                                     :class="kelasHuruf(opsi)" x-text="opsi.toUpperCase()"></span>
                                 <span class="font-medium text-[15px] sm:text-base leading-tight" x-text="soalSekarang['opsi_' + opsi]"></span>
                             </button>
+                            <button
+                                @click="catatanSekarang = catatanSekarang === opsi ? null : opsi"
+                                type="button"
+                                value="{{$aziz_ganteng}}"
+                                class="absolute top-3 right-3 w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-cyan-600 transition"
+                                :class="catatanSekarang === opsi ? 'bg-cyan-50 border border-cyan-200' : 'bg-white border border-slate-200'">
+                            </button>
+                         
+                                 
                         </template>
                     </div>
 

@@ -54,6 +54,13 @@
                             <h3 class="text-lg font-bold text-slate-800 mb-2 leading-snug">
                                 {{ $target->judul_target }}
                             </h3>
+
+                            {{-- Deskripsi Target (Ditampilkan di bawah judul jika ada) --}}
+                            @if($target->deskripsi)
+                                <p class="text-xs text-slate-500 mt-2 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                    {{ $target->deskripsi }}
+                                </p>
+                            @endif
                         </div>
 
                         {{-- Action Buttons --}}
@@ -87,13 +94,12 @@
             </div>
         @endif
 
-        {{-- Hidden Form untuk Eksekusi Hapus --}}
         <form id="global-delete-form" action="" method="POST" class="hidden">
             @csrf
             @method('DELETE')
         </form>
 
-        {{-- Modal Popup Tailwind + Alpine.js --}}
+        {{-- Modal Konfirmasi Hapus --}}
         <div x-show="openDelete" 
              x-cloak
              style="display: none;"

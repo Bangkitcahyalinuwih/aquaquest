@@ -15,6 +15,7 @@ class Target extends Model
         'kategori',
         'ref_id',
         'status',
+        'deskripsi',
     ];
 
     public function user()
