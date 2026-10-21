@@ -25,6 +25,7 @@
             $menu[] = ['Koleksi', 'kartu.index', 'kartu.*'];
             $menu[] = ['Peringkat', 'leaderboard.index', 'leaderboard.*'];
             $menu[] = ['Dashboard', 'dashboard', 'dashboard'];
+            $menu[] = ['Jurnal', 'jurnal.index', 'jurnal.*'];
         }
     }
 @endphp
