@@ -70,6 +70,7 @@ alasannya dicatat di [docs/DECISIONS.md](docs/DECISIONS.md).
 - Kuis pilihan ganda hybrid (soal teks dan tebak gambar) dengan hitung mundur
 - XP, level, dan kartu koleksi virtual yang terbuka otomatis
 - Peringkat Top XP dan dashboard progres (level, XP, kartu berikutnya, status jatah XP harian)
+- Jurnal belajar pribadi: catat, ubah, dan hapus catatan belajar (hanya pemilik yang dapat mengelolanya)
 
 **Admin (dinas terkait)**
 
@@ -201,6 +202,8 @@ biota tersedia), dan 10 akun.
 | `/profile`                                                       | Login  | Profil                                           |
 | `/admin`                                                         | Admin  | Dashboard admin                                  |
 | `/admin/biota`, `/admin/edukasi`, `/admin/soal`, `/admin/kartu`  | Admin  | CRUD konten                                      |
+| `/jurnal`, `/jurnal/create`, `/jurnal/{jurnal}/edit`             | Login  | Daftar, form tambah, dan form ubah jurnal belajar|
+| `POST /jurnal`, `PUT /jurnal/{jurnal}`, `DELETE /jurnal/{jurnal}`| Login  | Simpan, perbarui, dan hapus jurnal               |
 
 ## Basis data
 
@@ -215,6 +218,7 @@ erDiagram
     BIOTA |o--o{ SOAL_KUIS : menjadi_topik
     BIOTA ||--o| KARTU : punya
     KARTU ||--o{ KOLEKSI_KARTU : dikoleksi
+    USERS ||--o{ JURNAL_BELAJAR : menulis
 ```
 
 Skema kolom lengkap dan diagram alur kuis: [docs/ERD.md](docs/ERD.md).
