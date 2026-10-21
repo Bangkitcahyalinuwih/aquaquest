@@ -24,6 +24,7 @@
         if ($pengguna) {
             $menu[] = ['Koleksi', 'kartu.index', 'kartu.*'];
             $menu[] = ['Peringkat', 'leaderboard.index', 'leaderboard.*'];
+            $menu[] = ['Target Belajar', 'targets.index', 'targets.*']; 
             $menu[] = ['Dashboard', 'dashboard', 'dashboard'];
         }
     }
