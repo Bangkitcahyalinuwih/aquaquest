@@ -14,6 +14,7 @@ Proyek Politeknik Negeri Madiun, Program Studi Teknologi Rekayasa Perangkat Luna
 - Materi edukasi dengan pencarian
 - Kuis pilihan ganda hybrid (soal teks dan tebak gambar) dengan timer; XP, level, dan kartu koleksi
 - Koleksi kartu virtual (terkunci/terbuka), peringkat Top XP, dashboard progres
+- Target Belajar dengan banner pengingat 
 
 **Admin (dinas terkait)**
 
