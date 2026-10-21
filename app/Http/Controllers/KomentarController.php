@@ -12,9 +12,17 @@ class KomentarController extends Controller
 
     public function store(SimpanKomentarRequest $request, Biota $biota)
     {
+        // dd($request->all());
+        // --- TAMBAHKAN BLOK INI ---
+        // $sudahKomen = $biota->komentar()->where('user_id', $request->user()->id)->exists();
+        // if ($sudahKomen) {
+        //     return back()->withErrors(['isi' => 'Kamu sudah memberikan komentar di biota ini.']);
+        // }
+        //
         $biota->komentar()->create([
             'user_id' => $request->user()->id,
             'isi' => $request->validated('isi'),
+            'rating' => $request->validated('rating'),
         ]);
 
         return redirect(route('biota.show', $biota) . '#komentar')

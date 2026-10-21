@@ -15,6 +15,7 @@ class SimpanKomentarRequest extends FormRequest
     {
         return [
             'isi' => ['required', 'string', 'min:3', 'max:1000'],
+            'rating' => ['required', 'integer', 'min:1', 'max:5']
         ];
     }
 

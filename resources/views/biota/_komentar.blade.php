@@ -11,14 +11,26 @@
     @auth
         <form method="POST" action="{{ route('komentar.store', $biota) }}" class="mt-4">
             @csrf
+
+            {{-- Input Rating --}}
+            <div class="mb-3">
+                <label for="rating" class="block text-sm font-medium text-slate-700 mb-1">Beri Rating (1-5)</label>
+                <input type="number" name="rating" id="rating" min="1" max="5" required
+                    value="{{ old('rating') }}"
+                    class="w-24 border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm">
+                <x-input-error :messages="$errors->get('rating')" class="mt-1" />
+            </div>
+
+            {{-- Input Isi Komentar --}}
             <textarea name="isi" rows="3" required maxlength="1000" placeholder="Tulis komentarmu..."
                 class="w-full border-gray-300 focus:border-primary focus:ring-primary rounded-md shadow-sm">{{ old('isi') }}</textarea>
             <x-input-error :messages="$errors->get('isi')" class="mt-1" />
+
             <x-primary-button class="mt-2">Kirim Komentar</x-primary-button>
         </form>
     @else
         <p class="mt-4 text-sm text-slate-600">
-            <a href="{{ route('login') }}" class="text-primary underline">Masuk untuk berkomentar</a>
+            <a href="{{ route('komentar.login', $biota) }}" class="text-primary underline">Masuk untuk berkomentar</a>
         </p>
     @endauth
 
@@ -35,6 +47,13 @@
                         @endif
                     </span>
                 </div>
+
+                {{-- Menampilkan Nilai Rating --}}
+                @if ($item->rating)
+                    <div class="mt-1 text-sm font-bold text-yellow-500">
+                        Rating: {{ $item->rating }} / 5 ⭐
+                    </div>
+                @endif
 
                 {{-- {{ }} meng-escape HTML sehingga aman dari XSS --}}
                 <p class="mt-2 text-slate-700 whitespace-pre-line">{{ $item->isi }}</p>

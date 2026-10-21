@@ -12,7 +12,7 @@ class Komentar extends Model
 
     protected $table = 'komentar';
 
-    protected $fillable = ['biota_id', 'user_id', 'isi'];
+    protected $fillable = ['biota_id', 'user_id', 'isi', 'rating'];
 
     public function biota(): BelongsTo
     {
