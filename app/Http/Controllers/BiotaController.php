@@ -39,4 +39,8 @@ class BiotaController extends Controller
         return view('biota.show', compact('biota'));
     }
 }
+<<<<<<< HEAD
 //simulasi coflictt B slfi
+=======
+//simulasi silfi A mahasiswa
+>>>>>>> modul12/bcl
