@@ -41,6 +41,9 @@ Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->
 Route::get('/koleksi', [KartuController::class, 'index'])->name('kartu.index')->middleware('auth');
 Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 require __DIR__ . '/auth.php';
+<<<<<<< HEAD
 
 Route::resource('jurnal', JurnalBelajarController::class)->except('show');
 Route::resource('jurnal', JurnalBelajarController::class)->except('show')->middleware('auth');
+=======
+>>>>>>> modul12/bcl
