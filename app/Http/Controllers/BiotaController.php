@@ -39,4 +39,4 @@ class BiotaController extends Controller
         return view('biota.show', compact('biota'));
     }
 }
-//simulasi silfi A
+//simulasi silfi A mahasiswa
