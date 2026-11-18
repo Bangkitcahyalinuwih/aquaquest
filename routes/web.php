@@ -9,7 +9,8 @@ use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JurnalBelajarController;
+
+//simulasi mahasiswa b
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -33,7 +34,10 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/biota', [BiotaController::class, 'index'])->name('biota.index');
+Route::get('/biota/export-excel', [BiotaController::class, 'exportExcel'])->name('biota.export.excel');
 Route::get('/biota/{biota:slug}', [BiotaController::class, 'show'])->name('biota.show');
+
+
 
 Route::get('/edukasi', [KontenEdukasiController::class, 'index'])->name('edukasi.index');
 Route::get('/edukasi/{konten:slug}', [KontenEdukasiController::class, 'show'])->name('edukasi.show');
